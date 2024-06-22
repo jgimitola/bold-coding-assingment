@@ -1,0 +1,1 @@
+export const DEFAULT_BROWSER_FONT_SIZE = 16;
