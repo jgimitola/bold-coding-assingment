@@ -1,5 +1,12 @@
+import { MixerVerticalIcon } from '@radix-ui/react-icons';
+
 import TotalCard from '@/dashboard/components/TotalCard';
 import PageStyles from '@/dashboard/styles/pageStyles';
+
+import FilterButton from '@/shared/components/FilterButton';
+import FilterItem from '@/shared/components/FilterItem';
+import FilterList from '@/shared/components/FilterList';
+import FilterOption from '@/shared/components/FilterOption';
 
 export default function Home() {
   const sellings = {
@@ -12,20 +19,26 @@ export default function Home() {
       <PageStyles.Heading>
         <TotalCard {...sellings} />
 
-        <div>
-          <ul>
-            <li>
-              <button type="button">Hoy</button>
-            </li>
-            <li>
-              <button type="button">Esta semana</button>
-            </li>
-            <li>
-              <button type="button">Septiembre</button>
-            </li>
-          </ul>
-          <button type="button">Filtrar</button>
-        </div>
+        <PageStyles.Filters>
+          <FilterList>
+            <FilterItem>
+              <FilterOption type="button">Hoy</FilterOption>
+            </FilterItem>
+
+            <FilterItem>
+              <FilterOption type="button">Esta semana</FilterOption>
+            </FilterItem>
+
+            <FilterItem>
+              <FilterOption type="button">Septiembre</FilterOption>
+            </FilterItem>
+          </FilterList>
+
+          <FilterButton type="button">
+            Filtrar
+            <MixerVerticalIcon />
+          </FilterButton>
+        </PageStyles.Filters>
       </PageStyles.Heading>
 
       <table></table>
