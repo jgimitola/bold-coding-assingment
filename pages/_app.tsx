@@ -10,7 +10,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from '@/shared/components/GlobalStyle';
+import DefaultLayout from '@/shared/layouts/DefaultLayout';
 import theme from '@/shared/lib/theme';
+import Head from 'next/head';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,14 +26,25 @@ const queryClient = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <QueryClientProvider client={queryClient}>
-        <HydrationBoundary state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
-        </HydrationBoundary>
-        <ReactQueryDevtools initialIsOpen={false} position="right" />
-      </QueryClientProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>Bold Dashboard</title>
+
+        <meta name="description" content="Bold dashboard page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <QueryClientProvider client={queryClient}>
+          <HydrationBoundary state={pageProps.dehydratedState}>
+            <DefaultLayout>
+              <Component {...pageProps} />
+            </DefaultLayout>
+          </HydrationBoundary>
+          <ReactQueryDevtools initialIsOpen={false} position="right" />
+        </QueryClientProvider>
+      </ThemeProvider>
+    </>
   );
 }
