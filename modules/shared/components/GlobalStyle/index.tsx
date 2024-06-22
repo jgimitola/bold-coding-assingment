@@ -51,7 +51,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${cl('lightGray')};
+    background-color: ${cl('background')};
   }
   
 `;
