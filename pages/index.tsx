@@ -1,11 +1,7 @@
-import { Montserrat } from 'next/font/google';
 import Head from 'next/head';
 
-import TestStyled from '@/modules/shared/components/TestStyled';
-import WrapperTest from '@/modules/shared/components/WrapperTest';
-import styles from '@/styles/Home.module.css';
-
-const inter = Montserrat({ subsets: ['latin'] });
+import TestStyled from '@/shared/components/TestStyled';
+import WrapperTest from '@/shared/components/WrapperTest';
 
 export default function Home() {
   return (
@@ -17,11 +13,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={`${styles.main} ${inter.className}`}>
-        <WrapperTest>
-          <TestStyled>hola</TestStyled>
-        </WrapperTest>
-      </main>
+      <WrapperTest>
+        <TestStyled>hola</TestStyled>
+      </WrapperTest>
     </>
   );
 }
