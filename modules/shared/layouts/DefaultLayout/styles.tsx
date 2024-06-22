@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 import cl from '@/shared/lib/cl';
+import mq from '@/shared/lib/mq';
 import rem from '@/shared/lib/rem';
 
 const Option = styled.a`
   color: inherit;
   text-decoration: none;
-  font-size: ${rem(14)};
 
   &:has(svg) {
     display: inline-flex;
@@ -17,7 +17,12 @@ const Option = styled.a`
 `;
 
 const OptionItem = styled.li`
+  font-size: ${rem(14)};
   color: ${cl('white')};
+
+  @media only screen and (${mq('md')}) {
+    font-size: ${rem(12)};
+  }
 `;
 
 const OptionList = styled.ul`
@@ -34,7 +39,7 @@ const OptionList = styled.ul`
 const LogoWrapper = styled.div`
   flex-shrink: 0;
 
-  width: 67px;
+  aspect-ratio: 2.79166666667;
   height: var(--logoHeight);
 
   color: ${cl('white')};
@@ -42,6 +47,7 @@ const LogoWrapper = styled.div`
 
 const Navigation = styled.nav`
   display: flex;
+  align-items: center;
 
   height: var(--navigationHeight);
 
@@ -71,6 +77,11 @@ const Container = styled.div`
   --pageInlinePadding: 32px;
 
   height: 100%;
+
+  @media only screen and (${mq('md')}) {
+    --pageInlinePadding: 16px;
+    --navigationBlockPadding: 12px;
+  }
 `;
 
 const LayoutStyles = {

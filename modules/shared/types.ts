@@ -14,6 +14,10 @@ export type Palette = {
   background: string;
 };
 
+export type MediaQuery = {
+  md: string;
+};
+
 export type Leaves<T> = T extends object
   ? {
       [K in keyof T]: `${Exclude<K, symbol>}${Leaves<T[K]> extends never
