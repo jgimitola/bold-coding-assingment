@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 
 import {
   HydrationBoundary,
@@ -12,7 +13,6 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '@/shared/components/GlobalStyle';
 import DefaultLayout from '@/shared/layouts/DefaultLayout';
 import theme from '@/shared/lib/theme';
-import Head from 'next/head';
 
 const queryClient = new QueryClient({
   defaultOptions: {
