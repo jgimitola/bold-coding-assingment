@@ -1,3 +1,4 @@
+import cl from '@/shared/lib/cl';
 import { Montserrat } from 'next/font/google';
 
 import { createGlobalStyle } from 'styled-components';
@@ -47,6 +48,10 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-family: ${montserrat.style.fontFamily};
+  }
+
+  body {
+    background-color: ${cl('lightGray')};
   }
   
 `;
