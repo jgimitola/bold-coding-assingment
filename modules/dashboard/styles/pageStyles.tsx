@@ -23,6 +23,8 @@ const Heading = styled.section`
   display: flex;
   gap: 16px;
 
+  margin-block-end: 16px;
+
   ${CardStyles.Container} {
     min-width: ${rem(400)};
   }

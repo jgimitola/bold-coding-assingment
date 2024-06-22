@@ -7,6 +7,7 @@ import FilterButton from '@/shared/components/FilterButton';
 import FilterItem from '@/shared/components/FilterItem';
 import FilterList from '@/shared/components/FilterList';
 import FilterOption from '@/shared/components/FilterOption';
+import formatPrice from '@/shared/lib/formatPrice';
 
 export default function Home() {
   const sellings = {
@@ -41,7 +42,29 @@ export default function Home() {
         </PageStyles.Filters>
       </PageStyles.Heading>
 
-      <table></table>
+      <table>
+        <caption>Tus ventas de septiembre</caption>
+
+        <thead>
+          <tr>
+            <th>Transacción</th>
+            <th>Fecha y hora</th>
+            <th>Método de pago</th>
+            <th>ID transacción Bold</th>
+            <th>Monto</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Cobro exitoso</td>
+            <td>2024-06-22T15:36:52-05:00</td>
+            <td>**** **** **** 7711</td>
+            <td>ABD233KJK312</td>
+            <td>{formatPrice(25000)}</td>
+          </tr>
+        </tbody>
+      </table>
     </PageStyles.Container>
   );
 }
