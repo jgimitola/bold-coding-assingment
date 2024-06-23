@@ -42,6 +42,8 @@ const Container = styled.main`
   display: flex;
   flex-direction: column;
 
+  height: 100%;
+
   padding-block-start: 32px;
 
   @media only screen and (${mq('md')}) {

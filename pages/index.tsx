@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import dynamic from 'next/dynamic';
+
 import { MixerVerticalIcon } from '@radix-ui/react-icons';
 
 import * as Popover from '@radix-ui/react-popover';
@@ -18,14 +20,19 @@ import {
 } from '@/transaction/controllers/listTransactions';
 import useListTransactions from '@/transaction/hooks/useListTransactions';
 
+const Transactions = dynamic(
+  () => import('@/dashboard/components/Transactions'),
+  {
+    ssr: false,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
 import FilterButton from '@/shared/components/FilterButton';
 import FilterItem from '@/shared/components/FilterItem';
 import FilterList from '@/shared/components/FilterList';
 import FilterOption from '@/shared/components/FilterOption';
 import FilterPopover from '@/shared/components/FilterPopover';
-import { formatDateHour } from '@/shared/lib/dateHelpers';
-import formatCardNumber from '@/shared/lib/formatCardNumber';
-import formatPrice from '@/shared/lib/formatPrice';
 
 export default function Home() {
   const dateFilterOptions = useComputeDateFilterOptions();
@@ -56,8 +63,6 @@ export default function Home() {
   });
 
   const transactions = listQuery.data?.results || [];
-
-  const hasTransactions = transactions.length > 0;
 
   const handleSetDateFilter = (dateFilter: DateFilter) => {
     setSelectedOptionLabel(dateFilter.label);
@@ -107,35 +112,10 @@ export default function Home() {
         </PageStyles.Filters>
       </PageStyles.Heading>
 
-      <table>
-        <caption>Tus ventas de septiembre</caption>
-
-        <thead>
-          <tr>
-            <th>Transacción</th>
-            <th>Fecha y hora</th>
-            <th>Método de pago</th>
-            <th>ID transacción Bold</th>
-            <th>Monto</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {transactions.map((transaction) => (
-            <tr key={transaction.id}>
-              <td>
-                {transaction.state === 'SUCCESS'
-                  ? 'Cobro exitoso'
-                  : 'Cobro no realizado'}
-              </td>
-              <td>{formatDateHour(transaction.createdAt)}</td>
-              <td>{formatCardNumber(`${transaction.value}`)}</td>
-              <td>{transaction.boldId}</td>
-              <td>{formatPrice(transaction.value)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Transactions
+        filterLabel={selectedOptionLabel}
+        transactions={transactions}
+      />
     </PageStyles.Container>
   );
 }
