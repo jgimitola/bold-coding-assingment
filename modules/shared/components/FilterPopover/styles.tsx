@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import cl from '@/shared/lib/cl';
 import rem from '@/shared/lib/rem';
 
+import Button from '../Button';
+import Label from '../Label';
+
 const Title = styled.h4`
   user-select: none;
 
@@ -18,6 +21,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  ${Label} {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  ${Button} {
+    margin-block-start: 16px;
+  }
 `;
 
 const PopoverStyles = { Title, Container };

@@ -1,17 +1,16 @@
 import { type ComponentProps } from 'react';
 
-import * as RCheckbox from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
+import CheckboxStyles from './styles';
 
-type CheckboxProps = ComponentProps<typeof RCheckbox.Root>;
+type CheckboxProps = ComponentProps<typeof CheckboxStyles.CheckboxRoot>;
 
 const Checkbox = (props: CheckboxProps) => {
   return (
-    <RCheckbox.Root {...props}>
-      <RCheckbox.Indicator>
-        <CheckIcon />
-      </RCheckbox.Indicator>
-    </RCheckbox.Root>
+    <CheckboxStyles.CheckboxRoot {...props}>
+      <CheckboxStyles.CheckboxIndicator>
+        <CheckboxStyles.Fill />
+      </CheckboxStyles.CheckboxIndicator>
+    </CheckboxStyles.CheckboxRoot>
   );
 };
 
