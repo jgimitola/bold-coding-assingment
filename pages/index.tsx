@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { MixerVerticalIcon } from '@radix-ui/react-icons';
 
+import * as Popover from '@radix-ui/react-popover';
+
 import TotalCard from '@/dashboard/components/TotalCard';
 import useComputeDateFilterOptions from '@/dashboard/hooks/useComputeDateFilterOptions';
 import PageStyles from '@/dashboard/styles/pageStyles';
@@ -14,10 +16,14 @@ import {
 } from '@/transaction/controllers/listTransactions';
 import useListTransactions from '@/transaction/hooks/useListTransactions';
 
+import Button from '@/shared/components/Button';
+import Checkbox from '@/shared/components/Checkbox';
 import FilterButton from '@/shared/components/FilterButton';
 import FilterItem from '@/shared/components/FilterItem';
 import FilterList from '@/shared/components/FilterList';
 import FilterOption from '@/shared/components/FilterOption';
+import FilterPopover from '@/shared/components/FilterPopover';
+import Label from '@/shared/components/Label';
 import { formatDateHour } from '@/shared/lib/dateHelpers';
 import formatCardNumber from '@/shared/lib/formatCardNumber';
 import formatPrice from '@/shared/lib/formatPrice';
@@ -78,10 +84,35 @@ export default function Home() {
             ))}
           </FilterList>
 
-          <FilterButton type="button">
-            Filtrar
-            <MixerVerticalIcon />
-          </FilterButton>
+          <Popover.Root>
+            <Popover.Trigger asChild>
+              <FilterButton type="button">
+                Filtrar
+                <MixerVerticalIcon />
+              </FilterButton>
+            </Popover.Trigger>
+
+            <Popover.Portal>
+              <FilterPopover>
+                <Label>
+                  <Checkbox />
+                  Cobro con datáfono
+                </Label>
+
+                <Label>
+                  <Checkbox />
+                  Cobro con link de pago
+                </Label>
+
+                <Label>
+                  <Checkbox />
+                  Ver todos
+                </Label>
+
+                <Button>Aplicar</Button>
+              </FilterPopover>
+            </Popover.Portal>
+          </Popover.Root>
         </PageStyles.Filters>
       </PageStyles.Heading>
 
