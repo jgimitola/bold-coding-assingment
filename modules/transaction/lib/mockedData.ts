@@ -13,7 +13,7 @@ const mockedData: TransactionData[] = [
     value: 25000,
     commission: 0,
     obfuscatedCardNumber: 7710,
-    createdAt: '2024-06-20T12:36:52-05:00',
+    createdAt: '2024-06-22T12:36:52-05:00',
   },
   {
     id: uuid(),

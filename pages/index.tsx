@@ -3,9 +3,12 @@ import { useState } from 'react';
 import { MixerVerticalIcon } from '@radix-ui/react-icons';
 
 import TotalCard from '@/dashboard/components/TotalCard';
+import useComputeDateFilterOptions from '@/dashboard/hooks/useComputeDateFilterOptions';
 import PageStyles from '@/dashboard/styles/pageStyles';
+import type { DateFilter } from '@/dashboard/types';
 
 import {
+  Filters,
   defaultFilters,
   defaultPagination,
 } from '@/transaction/controllers/listTransactions';
@@ -20,7 +23,16 @@ import formatCardNumber from '@/shared/lib/formatCardNumber';
 import formatPrice from '@/shared/lib/formatPrice';
 
 export default function Home() {
-  const [filters, setFilters] = useState(defaultFilters);
+  const dateFilterOptions = useComputeDateFilterOptions();
+
+  const [selectedOptionLabel, setSelectedOptionLabel] = useState(
+    dateFilterOptions[0].label
+  );
+  const [filters, setFilters] = useState<Filters>({
+    ...defaultFilters,
+    startDate: dateFilterOptions[0].startDate,
+    endDate: dateFilterOptions[0].endDate,
+  });
 
   const sellings = {
     value: 1250000,
@@ -37,24 +49,33 @@ export default function Home() {
 
   const hasTransactions = transactions.length > 0;
 
+  const handleSetDateFilter = (dateFilter: DateFilter) => {
+    setSelectedOptionLabel(dateFilter.label);
+    setFilters((p) => ({
+      ...p,
+      startDate: dateFilter.startDate,
+      endDate: dateFilter.endDate,
+    }));
+  };
+
   return (
     <PageStyles.Container>
       <PageStyles.Heading>
-        <TotalCard {...sellings} />
+        <TotalCard {...sellings} filterLabel={selectedOptionLabel} />
 
         <PageStyles.Filters>
           <FilterList>
-            <FilterItem>
-              <FilterOption type="button">Hoy</FilterOption>
-            </FilterItem>
-
-            <FilterItem>
-              <FilterOption type="button">Esta semana</FilterOption>
-            </FilterItem>
-
-            <FilterItem>
-              <FilterOption type="button">Septiembre</FilterOption>
-            </FilterItem>
+            {dateFilterOptions.map((df) => (
+              <FilterItem key={df.label}>
+                <FilterOption
+                  type="button"
+                  onClick={() => handleSetDateFilter(df)}
+                  data-active={selectedOptionLabel === df.label}
+                >
+                  {df.label}
+                </FilterOption>
+              </FilterItem>
+            ))}
           </FilterList>
 
           <FilterButton type="button">

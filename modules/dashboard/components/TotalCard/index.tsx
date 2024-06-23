@@ -12,12 +12,13 @@ import formatPrice from '@/shared/lib/formatPrice';
 import CardStyles from './styles';
 
 interface TotalCardProps {
+  filterLabel: string;
   date: string;
   value: number;
 }
 
 const TotalCard = (props: TotalCardProps) => {
-  const { date, value = 0 } = props;
+  const { filterLabel, date, value = 0 } = props;
 
   const isTodayDate = isToday(date);
 
@@ -29,9 +30,7 @@ const TotalCard = (props: TotalCardProps) => {
   return (
     <CardStyles.Container>
       <CardStyles.Header>
-        <CardStyles.Title>
-          Total de ventas de {isTodayDate ? 'Hoy' : monthName}
-        </CardStyles.Title>
+        <CardStyles.Title>Total de ventas de {filterLabel}</CardStyles.Title>
 
         <InfoCircledIcon />
       </CardStyles.Header>

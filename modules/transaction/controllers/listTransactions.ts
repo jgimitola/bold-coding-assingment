@@ -46,6 +46,7 @@ const listTransactions: QueryController<Params, TransactionList> = async (
       headers: { Authorization: Boolean(token) && `Bearer ${token}` },
       params: {
         ...computePaginatedParams(params),
+        ...params.filterParams,
         ...params.urlParams,
       },
     });
