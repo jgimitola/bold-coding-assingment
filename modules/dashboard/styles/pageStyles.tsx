@@ -31,6 +31,10 @@ const Heading = styled.section`
 
   @media only screen and (${mq('md')}) {
     flex-direction: column-reverse;
+
+    ${CardStyles.Container} {
+      min-width: 0;
+    }
   }
 `;
 
