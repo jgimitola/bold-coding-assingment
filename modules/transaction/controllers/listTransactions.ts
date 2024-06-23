@@ -32,7 +32,7 @@ export interface Pagination extends PaginationParams {}
 
 export const defaultPagination: Pagination = {
   pageIndex: 0,
-  pageSize: 20,
+  pageSize: 40,
 };
 
 export type Params = ListParams<Filters, Pagination>;

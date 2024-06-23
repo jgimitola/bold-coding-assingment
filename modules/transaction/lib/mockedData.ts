@@ -1,210 +1,63 @@
 import { v4 as uuid } from 'uuid';
 
+import { addMonths } from 'date-fns/addMonths';
+import { compareDesc } from 'date-fns/compareDesc';
+import { endOfMonth } from 'date-fns/endOfMonth';
+import { formatISO } from 'date-fns/formatISO';
+import { startOfMonth } from 'date-fns/startOfMonth';
+
 import type { TransactionData } from '../types';
 
 const generateBoldId = () => uuid().substring(0, 8).toUpperCase();
 
-const mockedData: TransactionData[] = [
-  {
+function getRandomOption<T>(options: [T, T]): T {
+  const randomIndex = Math.floor(Math.random() * 2);
+  return options[randomIndex];
+}
+
+const getRandomPrice = (min: number = 1000, max: number = 1000000) =>
+  Math.random() * (max - min) + min;
+
+function getRandomFourDigitNumber(): number {
+  const min = 1000;
+  const max = 9999;
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomDateISO(): string {
+  const now = new Date();
+  const nextMonth = addMonths(now, 1);
+
+  const currentMonthStart = startOfMonth(now);
+  const currentMonthEnd = endOfMonth(now);
+  const nextMonthStart = startOfMonth(nextMonth);
+  const nextMonthEnd = endOfMonth(nextMonth);
+
+  const startDate = Math.random() < 0.85 ? currentMonthStart : nextMonthStart;
+  const endDate =
+    startDate === currentMonthStart ? currentMonthEnd : nextMonthEnd;
+
+  const randomDate = new Date(
+    startDate.getTime() +
+      Math.random() * (endDate.getTime() - startDate.getTime())
+  );
+
+  return formatISO(randomDate);
+}
+
+const mockedData: TransactionData[] = Array(40)
+  .fill(1)
+  .map(() => ({
     id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
+    state: getRandomOption(['SUCCESS', 'FAILED']),
+    type: getRandomOption(['LINK', 'DATAPHONE']),
     boldId: generateBoldId(),
-    value: 25000,
-    commission: 0,
-    obfuscatedCardNumber: 7710,
-    createdAt: '2024-06-22T12:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 12000,
-    commission: 0,
-    obfuscatedCardNumber: 7511,
-    createdAt: '2024-06-19T16:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 28000,
-    commission: 200,
-    obfuscatedCardNumber: 4511,
-    createdAt: '2024-06-25T19:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 1500,
-    commission: 2120,
-    obfuscatedCardNumber: 76311,
-    createdAt: '2024-06-29T09:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 3600,
-    commission: 0,
-    obfuscatedCardNumber: 74711,
-    createdAt: '2024-05-20T15:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 25000,
-    commission: 0,
-    obfuscatedCardNumber: 7710,
-    createdAt: '2024-06-20T12:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 25000,
-    commission: 2354,
-    obfuscatedCardNumber: 7710,
-    createdAt: '2024-06-20T12:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 12000,
-    commission: 0,
-    obfuscatedCardNumber: 7511,
-    createdAt: '2024-06-19T16:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 28000,
-    commission: 200,
-    obfuscatedCardNumber: 4511,
-    createdAt: '2024-06-25T19:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 1500,
-    commission: 0,
-    obfuscatedCardNumber: 76311,
-    createdAt: '2024-06-29T09:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 3600,
-    commission: 0,
-    obfuscatedCardNumber: 74711,
-    createdAt: '2024-05-20T15:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 12000,
-    commission: 0,
-    obfuscatedCardNumber: 7511,
-    createdAt: '2024-06-19T16:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 25000,
-    commission: 0,
-    obfuscatedCardNumber: 7710,
-    createdAt: '2024-06-20T12:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 12000,
-    commission: 0,
-    obfuscatedCardNumber: 7511,
-    createdAt: '2024-06-19T16:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 28000,
-    commission: 200,
-    obfuscatedCardNumber: 4511,
-    createdAt: '2024-06-25T19:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 1500,
-    commission: 0,
-    obfuscatedCardNumber: 76311,
-    createdAt: '2024-06-29T09:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 3600,
-    commission: 0,
-    obfuscatedCardNumber: 74711,
-    createdAt: '2024-05-20T15:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 28000,
-    commission: 200,
-    obfuscatedCardNumber: 4511,
-    createdAt: '2024-06-25T19:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'SUCCESS',
-    type: 'LINK',
-    boldId: generateBoldId(),
-    value: 1500,
-    commission: 0,
-    obfuscatedCardNumber: 76311,
-    createdAt: '2024-06-29T09:36:52-05:00',
-  },
-  {
-    id: uuid(),
-    state: 'FAILED',
-    type: 'DATAPHONE',
-    boldId: generateBoldId(),
-    value: 3600,
-    commission: 0,
-    obfuscatedCardNumber: 74711,
-    createdAt: '2024-05-20T15:36:52-05:00',
-  },
-];
+    value: getRandomPrice(),
+    commission: getRandomOption([0, getRandomPrice(1000, 10000)]),
+    obfuscatedCardNumber: getRandomFourDigitNumber(),
+    createdAt: getRandomDateISO(),
+  }))
+  .sort((a, b) => compareDesc(a.createdAt, b.createdAt)) as TransactionData[];
 
 export default mockedData;
