@@ -44,10 +44,10 @@ const Container = styled.main`
 
   height: 100%;
 
-  padding-block-start: 32px;
+  padding-block: 32px;
 
   @media only screen and (${mq('md')}) {
-    padding-block-start: 16px;
+    padding-block: 16px;
   }
 `;
 
