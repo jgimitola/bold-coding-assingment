@@ -18,12 +18,14 @@ import type { TransactionData } from '../types';
 export interface Filters extends FilterParams {
   startDate: string | null;
   endDate: string | null;
+  type: TransactionData['type'] | null;
 }
 
 export const defaultFilters: Filters = {
   search: '',
   startDate: null,
   endDate: null,
+  type: null,
 };
 
 export interface Pagination extends PaginationParams {}

@@ -16,14 +16,11 @@ import {
 } from '@/transaction/controllers/listTransactions';
 import useListTransactions from '@/transaction/hooks/useListTransactions';
 
-import Button from '@/shared/components/Button';
-import Checkbox from '@/shared/components/Checkbox';
 import FilterButton from '@/shared/components/FilterButton';
 import FilterItem from '@/shared/components/FilterItem';
 import FilterList from '@/shared/components/FilterList';
 import FilterOption from '@/shared/components/FilterOption';
 import FilterPopover from '@/shared/components/FilterPopover';
-import Label from '@/shared/components/Label';
 import { formatDateHour } from '@/shared/lib/dateHelpers';
 import formatCardNumber from '@/shared/lib/formatCardNumber';
 import formatPrice from '@/shared/lib/formatPrice';
@@ -93,24 +90,7 @@ export default function Home() {
             </Popover.Trigger>
 
             <Popover.Portal>
-              <FilterPopover>
-                <Label>
-                  <Checkbox />
-                  Cobro con datáfono
-                </Label>
-
-                <Label>
-                  <Checkbox />
-                  Cobro con link de pago
-                </Label>
-
-                <Label>
-                  <Checkbox />
-                  Ver todos
-                </Label>
-
-                <Button>Aplicar</Button>
-              </FilterPopover>
+              <FilterPopover filters={filters} setFilters={setFilters} />
             </Popover.Portal>
           </Popover.Root>
         </PageStyles.Filters>

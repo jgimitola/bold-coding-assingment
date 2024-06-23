@@ -23,14 +23,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const startDate = req.query.startDate as string | undefined;
   const endDate = req.query.endDate as string | undefined;
+  const type = req.query.type as string | undefined;
 
-  const filteredData = applyLimitAndOffset(mockedData, limit, offset).filter(
-    (d) =>
+  const filteredData = applyLimitAndOffset(mockedData, limit, offset)
+    .filter((d) =>
       isWithinInterval(d.createdAt, {
         start: startDate || veryEarlyDate,
         end: endDate || veryFarFutureDate,
       })
-  );
+    )
+    .filter((d) => (type ? type === d.type : true));
 
   return res.status(200).json({
     count: filteredData.length,

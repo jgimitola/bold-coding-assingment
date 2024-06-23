@@ -1,9 +1,16 @@
-import * as RCheckbox from '@radix-ui/react-checkbox';
+import { type ComponentProps } from 'react';
 
-const Checkbox = () => {
+import * as RCheckbox from '@radix-ui/react-checkbox';
+import { CheckIcon } from '@radix-ui/react-icons';
+
+type CheckboxProps = ComponentProps<typeof RCheckbox.Root>;
+
+const Checkbox = (props: CheckboxProps) => {
   return (
-    <RCheckbox.Root>
-      <RCheckbox.Indicator />
+    <RCheckbox.Root {...props}>
+      <RCheckbox.Indicator>
+        <CheckIcon />
+      </RCheckbox.Indicator>
     </RCheckbox.Root>
   );
 };
