@@ -30,6 +30,8 @@ const Container = styled.div`
 
   ${Button} {
     margin-block-start: 16px;
+
+    margin-inline: auto;
   }
 `;
 

@@ -4,7 +4,9 @@ export type Palette = {
   white: string;
   black: string;
   blue: string;
+  darkRed: string;
   red: string;
+  lightRed: string;
   darkGray: string;
   lightGray: string;
   background: string;
