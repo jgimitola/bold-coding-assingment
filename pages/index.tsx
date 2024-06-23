@@ -5,7 +5,9 @@ import { MixerVerticalIcon } from '@radix-ui/react-icons';
 import * as Popover from '@radix-ui/react-popover';
 
 import TotalCard from '@/dashboard/components/TotalCard';
+import { defaultPagination as defaultMetrisPagination } from '@/dashboard/controllers/getMetrics';
 import useComputeDateFilterOptions from '@/dashboard/hooks/useComputeDateFilterOptions';
+import useGetMetrics from '@/dashboard/hooks/useGetMetrics';
 import PageStyles from '@/dashboard/styles/pageStyles';
 import type { DateFilter } from '@/dashboard/types';
 
@@ -37,10 +39,15 @@ export default function Home() {
     endDate: dateFilterOptions[0].endDate,
   });
 
-  const sellings = {
-    value: 1250000,
-    date: '2024-06-22T15:36:52-05:00',
-  };
+  const metricsQuery = useGetMetrics({
+    filterParams: {
+      search: '',
+      startDate: filters.startDate,
+      endDate: filters.endDate,
+    },
+    paginationParams: defaultMetrisPagination,
+    urlParams: {},
+  });
 
   const listQuery = useListTransactions({
     filterParams: filters,
@@ -64,7 +71,11 @@ export default function Home() {
   return (
     <PageStyles.Container>
       <PageStyles.Heading>
-        <TotalCard {...sellings} filterLabel={selectedOptionLabel} />
+        <TotalCard
+          filterLabel={selectedOptionLabel}
+          filters={filters}
+          value={metricsQuery.data?.data.totalSales || 0}
+        />
 
         <PageStyles.Filters>
           <FilterList>

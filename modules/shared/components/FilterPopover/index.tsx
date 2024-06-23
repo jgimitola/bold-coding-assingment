@@ -3,7 +3,7 @@ import { useState, type Dispatch, type SetStateAction } from 'react';
 import { Cross1Icon } from '@radix-ui/react-icons';
 
 import { Filters } from '@/transaction/controllers/listTransactions';
-import type { TransactionData } from '@/transaction/types';
+import type { TransactionType } from '@/transaction/types';
 
 import Button from '../Button';
 import Checkbox from '../Checkbox';
@@ -15,7 +15,7 @@ import PopoverStyles from './styles';
 
 const typeOptions: Array<{
   label: string;
-  type: TransactionData['type'] | null;
+  type: TransactionType | null;
 }> = [
   {
     label: 'Cobro con datáfono',

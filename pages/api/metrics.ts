@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import type { TransactionType } from '@/transaction/types';
+import mockedData from '@/transaction/lib/mockedData';
 
 import filterMockedData from '@/shared/lib/filterMockedData';
 
@@ -13,25 +13,22 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     });
   }
 
-  const limit = Number(req.query.limit);
-  const offset = Number(req.query.offset);
-
   const startDate = req.query.startDate as string | undefined;
   const endDate = req.query.endDate as string | undefined;
-  const type = req.query.type as TransactionType | undefined;
 
-  const filteredData = filterMockedData(
-    limit,
-    offset,
+  const totalSales = filterMockedData(
+    mockedData.length,
+    0,
     startDate,
     endDate,
-    type
-  );
+    undefined
+  )
+    .map((d) => (d.state === 'SUCCESS' ? d.value : 0))
+    .reduce((a, b) => a + b, 0);
 
   return res.status(200).json({
-    count: filteredData.length,
-    next: null,
-    previous: null,
-    results: filteredData,
+    error: false,
+    message: 'Total Exitoso!',
+    data: { totalSales },
   });
 }

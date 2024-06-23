@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import cl from '@/shared/lib/cl';
+import mq from '@/shared/lib/mq';
 import rem from '@/shared/lib/rem';
 
 const Title = styled.h3`
@@ -35,6 +36,10 @@ const Content = styled.div`
   ${Date}, ${Price} {
     text-align: center;
   }
+
+  @media only screen and (${mq('md')}) {
+    padding-block: 8px;
+  }
 `;
 
 const Header = styled.div`
@@ -57,6 +62,11 @@ const Header = styled.div`
 
   & > svg {
     margin-inline-start: auto;
+  }
+
+  @media only screen and (${mq('md')}) {
+    padding-block: 8px;
+    font-size: ${rem(14)};
   }
 `;
 

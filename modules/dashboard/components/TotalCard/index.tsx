@@ -1,31 +1,29 @@
-import { isToday } from 'date-fns/isToday';
-
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 
-import {
-  formatMonth,
-  formatMonthDay,
-  formatMonthYear,
-} from '@/shared/lib/dateHelpers';
+import { Filters } from '@/transaction/controllers/listTransactions';
+
+import useComputeDisplayedDate from '@/dashboard/hooks/useComputeDisplayedDate';
+
 import formatPrice from '@/shared/lib/formatPrice';
 
 import CardStyles from './styles';
 
 interface TotalCardProps {
   filterLabel: string;
-  date: string;
+  filters: Filters;
   value: number;
 }
 
 const TotalCard = (props: TotalCardProps) => {
-  const { filterLabel, date, value = 0 } = props;
+  const { filterLabel, filters, value = 0 } = props;
 
-  const isTodayDate = isToday(date);
+  if (!filters.startDate || !filters.endDate)
+    throw new Error('Dates should be constrained');
 
-  const monthName = formatMonth(date);
-  const formattedDate = isTodayDate
-    ? formatMonthDay(date)
-    : formatMonthYear(date);
+  const formattedDate = useComputeDisplayedDate({
+    startDate: filters.startDate,
+    endDate: filters.endDate,
+  });
 
   return (
     <CardStyles.Container>
