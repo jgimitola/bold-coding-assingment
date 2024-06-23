@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import cl from '@/shared/lib/cl';
+import mq from '@/shared/lib/mq';
 import rem from '@/shared/lib/rem';
 
 const FilterButton = styled.button`
@@ -23,6 +24,10 @@ const FilterButton = styled.button`
   &:hover {
     cursor: pointer;
     background-color: ${cl('lightGray')};
+  }
+
+  @media only screen and (${mq('md')}) {
+    font-size: ${rem(12)};
   }
 `;
 

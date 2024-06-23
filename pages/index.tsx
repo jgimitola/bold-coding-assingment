@@ -32,7 +32,7 @@ import FilterButton from '@/shared/components/FilterButton';
 import FilterItem from '@/shared/components/FilterItem';
 import FilterList from '@/shared/components/FilterList';
 import FilterOption from '@/shared/components/FilterOption';
-import FilterPopover from '@/shared/components/FilterPopover';
+import FilterPopover from '@/dashboard/components/FilterPopover';
 
 export default function Home() {
   const dateFilterOptions = useComputeDateFilterOptions();

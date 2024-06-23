@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import cl from '@/shared/lib/cl';
 import rem from '@/shared/lib/rem';
 
-import Button from '../Button';
-import Label from '../Label';
+import Button from '../../../shared/components/Button';
+import Label from '../../../shared/components/Label';
 
 const Title = styled.h4`
   user-select: none;

@@ -5,11 +5,11 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import { Filters } from '@/transaction/controllers/listTransactions';
 import type { TransactionType } from '@/transaction/types';
 
-import Button from '../Button';
-import Checkbox from '../Checkbox';
-import Label from '../Label';
-import PopoverClose from '../PopoverClose';
-import PopoverContent from '../PopoverContent';
+import Button from '../../../shared/components/Button';
+import Checkbox from '../../../shared/components/Checkbox';
+import Label from '../../../shared/components/Label';
+import PopoverClose from '../../../shared/components/PopoverClose';
+import PopoverContent from '../../../shared/components/PopoverContent';
 
 import PopoverStyles from './styles';
 
