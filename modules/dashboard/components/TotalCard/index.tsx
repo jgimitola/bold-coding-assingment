@@ -1,11 +1,14 @@
-import { format } from 'date-fns/format';
-import { parseISO } from 'date-fns/parseISO';
+import { isToday } from 'date-fns/isToday';
 
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 
+import {
+  formatMonth,
+  formatMonthDay,
+  formatMonthYear,
+} from '@/shared/lib/dateHelpers';
 import formatPrice from '@/shared/lib/formatPrice';
 
-import { isToday } from 'date-fns/isToday';
 import CardStyles from './styles';
 
 interface TotalCardProps {
@@ -18,11 +21,10 @@ const TotalCard = (props: TotalCardProps) => {
 
   const isTodayDate = isToday(date);
 
-  const monthName = format(parseISO(date), 'MMMM');
-  const formattedDate = format(
-    parseISO(date),
-    isTodayDate ? 'MMMM dd' : 'MMMM, yyyy'
-  );
+  const monthName = formatMonth(date);
+  const formattedDate = isTodayDate
+    ? formatMonthDay(date)
+    : formatMonthYear(date);
 
   return (
     <CardStyles.Container>
