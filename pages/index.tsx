@@ -5,7 +5,6 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import dynamic from 'next/dynamic';
 
 import { MixerVerticalIcon } from '@radix-ui/react-icons';
-
 import * as Popover from '@radix-ui/react-popover';
 
 import FilterPopover from '@/dashboard/components/FilterPopover';
@@ -14,6 +13,8 @@ import TransactionsList from '@/dashboard/components/TransactionsList';
 import { defaultPagination as defaultMetrisPagination } from '@/dashboard/controllers/getMetrics';
 import useComputeDateFilterOptions from '@/dashboard/hooks/useComputeDateFilterOptions';
 import useGetMetrics from '@/dashboard/hooks/useGetMetrics';
+import useSyncParams from '@/dashboard/hooks/useSyncParams';
+import mapInitialDateFilter from '@/dashboard/lib/mapInitialDateFilter';
 import PageStyles from '@/dashboard/styles/pageStyles';
 import type { DateFilter, ParamsFilters } from '@/dashboard/types';
 
@@ -33,8 +34,6 @@ import {
 import useListTransactions from '@/transaction/hooks/useListTransactions';
 import type { TransactionType } from '@/transaction/types';
 
-import useSyncParams from '@/dashboard/hooks/useSyncParams';
-import mapInitialDateFilter from '@/dashboard/lib/mapInitialDateFilter';
 import FilterButton from '@/shared/components/FilterButton';
 import FilterItem from '@/shared/components/FilterItem';
 import FilterList from '@/shared/components/FilterList';
