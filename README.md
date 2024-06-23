@@ -27,7 +27,7 @@ bun dev
 Or, build a production version with:
 
 ```bash
-npm run biild
+npm run build
 ```
 
 Then, execute it with:
