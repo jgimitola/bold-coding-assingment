@@ -20,16 +20,19 @@ const computeDateFilterOptions = (): DateOptions => {
 
   const dateFilters: DateOptions = [
     {
+      type: 'TODAY',
       label: 'Hoy',
       startDate: formatISO(startOfDay(todayObject)),
       endDate: formatISO(endOfDay(todayObject)),
     },
     {
+      type: 'WEEK',
       label: 'Esta semana',
       startDate: formatISO(startOfWeek(todayObject)),
       endDate: formatISO(endOfWeek(todayObject)),
     },
     {
+      type: 'MONTH',
       label: capitalize(formatMonth(todayISODate)),
       startDate: formatISO(startOfMonth(todayObject)),
       endDate: formatISO(endOfMonth(todayObject)),
