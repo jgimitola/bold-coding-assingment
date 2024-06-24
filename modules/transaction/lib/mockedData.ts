@@ -46,18 +46,22 @@ function getRandomDateISO(): string {
   return formatISO(randomDate);
 }
 
-const mockedData: TransactionData[] = Array(40)
-  .fill(1)
-  .map(() => ({
-    id: uuid(),
-    state: getRandomOption(['SUCCESS', 'FAILED']),
-    type: getRandomOption(['LINK', 'DATAPHONE']),
-    boldId: generateBoldId(),
-    value: getRandomPrice(),
-    commission: getRandomOption([0, getRandomPrice(1000, 10000)]),
-    obfuscatedCardNumber: getRandomFourDigitNumber(),
-    createdAt: getRandomDateISO(),
-  }))
-  .sort((a, b) => compareDesc(a.createdAt, b.createdAt)) as TransactionData[];
+// Wrap inside IIFE to prevent regenerating data on each api route import
+const mockedData: TransactionData[] = (() =>
+  Array(40)
+    .fill(1)
+    .map(() => ({
+      id: uuid(),
+      state: getRandomOption(['SUCCESS', 'FAILED']),
+      type: getRandomOption(['LINK', 'DATAPHONE']),
+      boldId: generateBoldId(),
+      value: getRandomPrice(),
+      commission: getRandomOption([0, getRandomPrice(1000, 10000)]),
+      obfuscatedCardNumber: getRandomFourDigitNumber(),
+      createdAt: getRandomDateISO(),
+    }))
+    .sort((a, b) =>
+      compareDesc(a.createdAt, b.createdAt)
+    ) as TransactionData[])();
 
 export default mockedData;
